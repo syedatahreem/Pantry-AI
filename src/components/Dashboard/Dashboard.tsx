@@ -48,6 +48,9 @@ const Dashboard = () => {
           </div>
         ))}
       </div>
+      <button className="bg-card text-teal rounded-2xl p-4 mt-4 w-full text-center">
+        + New recipe
+      </button>
     </div>
   );
 };
