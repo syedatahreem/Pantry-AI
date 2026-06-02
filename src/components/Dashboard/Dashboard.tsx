@@ -14,13 +14,9 @@ const recipes = [
 
 const Dashboard = () => {
   return (
-    <div className="min-h-screen p-6">
-      <h1 className="text-2xl font-semibold text-white">
-        Good evening, {user}
-      </h1>
-      <h4 className="text-sm text-muted  mt-1">
-        What are you cooking tonight?
-      </h4>
+    <div className="min-h-screen px-6 pb-6">
+      <h1 className="text-2xl font-semibold text-white">Good day, {user}</h1>
+      <h4 className="text-sm text-muted  mt-1">What are you cooking today?</h4>
 
       <h3 className="mt-4 mb-2 text-sm text-gray-400">OVERVIEW</h3>
       <div className="flex gap-3">
