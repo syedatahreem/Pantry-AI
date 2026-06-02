@@ -1,26 +1,18 @@
+import { useState } from "react";
 import "./App.css";
+import Layout from "./components/Layout/Layout";
 import Dashboard from "./components/Dashboard/Dashboard";
+import type { Pages } from "./types";
 
 function App() {
-  return (
-    <div className="bg-background min-h-screen p-6">
-      <div className="flex mb-6 gap-3">
-        <div className="text-white text-xl font-semibold italic">P@i</div>
-        <span className="text-white text-xl font-semibold">PantryAI</span>
-      </div>
+  const [activeTab, setActiveTab] = useState<Pages>("dashboard");
 
-      <div className="grid grid-cols-3 gap-4">
-        <div className="bg-panel rounded-2xl overflow-hidden">
-          <Dashboard />
-        </div>
-        <div className="bg-panel rounded-2xl overflow-hidden">
-          <Dashboard />
-        </div>
-        <div className="bg-panel rounded-2xl overflow-hidden">
-          <Dashboard />
-        </div>
-      </div>
-    </div>
+  return (
+    <Layout activeTab={activeTab} setActiveTab={setActiveTab}>
+      {activeTab === "dashboard" && <Dashboard />}
+      {/* {activeTab === "pantry" && < />}
+      {activeTab === "recipe-builder" && <Dashboard />} */}
+    </Layout>
   );
 }
 

@@ -18,3 +18,5 @@ export interface Recipe {
   ingredients: RecipeIngredient[];
   costPerServing: number;
 }
+
+export type Pages = "dashboard" | "pantry" | "recipe-builder";
