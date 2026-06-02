@@ -12,9 +12,10 @@ interface SidebarProps {
 
 const Sidebar = ({ activeTab, setActiveTab }: SidebarProps) => {
   return (
-    <div className="w-48 bg-panel flex flex-col p-4 gap-2">
-      <div className="flex items-center gap-2 mb-6">
-        <span className="text-white font-medium">PantryAI</span>
+    <div className="w-48 bg-panel flex flex-col p-6 gap-2">
+      <div className="flex items-center gap-2 mb-6 text-white font-medium">
+        <p>P.</p>
+        <span>PantryAI</span>
       </div>
 
       {navItems.map((item) => (
