@@ -3,6 +3,7 @@ import "./App.css";
 import Layout from "./components/Layout/Layout";
 import Dashboard from "./components/Dashboard/Dashboard";
 import type { Pages } from "./types";
+import Ingredients from "./components/Pantry.tsx/Ingredients";
 
 function App() {
   const [activeTab, setActiveTab] = useState<Pages>("dashboard");
@@ -10,7 +11,7 @@ function App() {
   return (
     <Layout activeTab={activeTab} setActiveTab={setActiveTab}>
       {activeTab === "dashboard" && <Dashboard />}
-      {activeTab === "pantry" && <Dashboard />}
+      {activeTab === "pantry" && <Ingredients />}
       {activeTab === "recipe-builder" && <Dashboard />}
     </Layout>
   );
