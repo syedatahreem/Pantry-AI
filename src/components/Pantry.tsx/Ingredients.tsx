@@ -1,4 +1,4 @@
-const ingredients = [
+export const ingredients = [
   { name: "Chicken", quantity: "200", unit: "g", totalCost: "$3.20" },
   { name: "Pasta", quantity: "3", unit: "kg", totalCost: "$4.20" },
   { name: "Tomatoes", quantity: "450", unit: "g", totalCost: "$7.20" },

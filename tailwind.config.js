@@ -9,6 +9,7 @@ export default {
         card: "var(--color-card)",
         teal: "var(--color-teal)",
         muted: "var(--color-muted)",
+        breakdown: "var(--color-breakdown)",
       },
       fontFamily: {
         sans: ["Inter", "sans-serif"],
