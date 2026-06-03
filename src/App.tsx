@@ -10,8 +10,8 @@ function App() {
   return (
     <Layout activeTab={activeTab} setActiveTab={setActiveTab}>
       {activeTab === "dashboard" && <Dashboard />}
-      {/* {activeTab === "pantry" && < />}
-      {activeTab === "recipe-builder" && <Dashboard />} */}
+      {activeTab === "pantry" && <Dashboard />}
+      {activeTab === "recipe-builder" && <Dashboard />}
     </Layout>
   );
 }
