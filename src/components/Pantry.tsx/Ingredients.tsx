@@ -41,12 +41,9 @@ const Ingredients = () => {
       </div>
 
       <h3 className="text-sm text-gray-400 mb-4 mt-10">YOUR PANTRY</h3>
-      <div className="grid grid-cols-3 gap-3">
+      <div className="grid grid-cols-6 gap-3">
         {ingredients.map((ingredient, index) => (
-          <div
-            className="bg-card p-2 rounded-lg flex justify-between items-center"
-            key={index}
-          >
+          <div className="bg-card p-2 rounded-lg " key={index}>
             <p className="text-white text-base font-medium">
               {ingredient.name}
             </p>
