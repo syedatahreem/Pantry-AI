@@ -1,6 +1,10 @@
-import { ingredients } from "../Pantry.tsx/Ingredients";
+import type { IngredientsType } from "../../types";
 
-const RecipeCostBuilder = () => {
+type InputProps = {
+  ingredients: IngredientsType[];
+};
+
+const RecipeCostBuilder = ({ ingredients }: InputProps) => {
   return (
     <div>
       <h3 className="text-sm text-gray-400 mb-4">RECIPE BUILDER</h3>

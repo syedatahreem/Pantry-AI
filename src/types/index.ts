@@ -1,9 +1,9 @@
-export interface Ingredient {
+export interface IngredientsType {
   id: string;
   name: string;
   unit: string;
-  quantity: number;
-  price: number;
+  quantity: string;
+  totalCost: string;
 }
 
 export interface RecipeIngredient {

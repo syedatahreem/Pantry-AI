@@ -1,15 +1,31 @@
-export const ingredients = [
-  { name: "Chicken", quantity: "200", unit: "g", totalCost: "$3.20" },
-  { name: "Pasta", quantity: "3", unit: "kg", totalCost: "$4.20" },
-  { name: "Tomatoes", quantity: "450", unit: "g", totalCost: "$7.20" },
-  { name: "Onions", quantity: "450", unit: "g", totalCost: "$7.20" },
-  { name: "Chicken", quantity: "200", unit: "g", totalCost: "$3.20" },
-  { name: "Pasta", quantity: "3", unit: "kg", totalCost: "$4.20" },
-  { name: "Tomatoes", quantity: "450", unit: "g", totalCost: "$7.20" },
-  { name: "Onions", quantity: "450", unit: "g", totalCost: "$7.20" },
-];
+import { useState } from "react";
+import type { IngredientsType } from "../../types";
 
-const Ingredients = () => {
+type IngredientProps = {
+  ingredients: IngredientsType[];
+  setIngredients: React.Dispatch<React.SetStateAction<IngredientsType[]>>;
+};
+
+const Ingredients = ({ ingredients, setIngredients }: IngredientProps) => {
+  const [form, setForm] = useState<IngredientsType>({
+    id: "",
+    name: "",
+    quantity: "",
+    unit: "",
+    totalCost: "",
+  });
+
+  const handleSave = () => {
+    if (!form.name || !form.quantity || !form.unit) return;
+    setIngredients([...ingredients, { ...form, id: crypto.randomUUID() }]);
+    setForm({
+      id: "",
+      name: "",
+      quantity: "",
+      unit: "",
+      totalCost: "",
+    });
+  };
   return (
     <div className="w-full">
       <h3 className="text-sm text-gray-400 mb-4">INGREDIENT MANAGER</h3>
@@ -21,20 +37,35 @@ const Ingredients = () => {
           <input
             className="bg-panel p-2 rounded-md text-white"
             placeholder="Ingredient name"
+            type="text"
+            value={form.name}
+            onChange={(e) => setForm({ ...form, name: e.target.value })}
           />
           <input
             className="bg-panel p-2 rounded-md  text-white"
             placeholder="Quantity"
+            type="text"
+            value={form.quantity}
+            onChange={(e) => setForm({ ...form, quantity: e.target.value })}
           />
           <input
             className="bg-panel p-2 rounded-md text-white"
             placeholder="Unit"
+            type="text"
+            value={form.unit}
+            onChange={(e) => setForm({ ...form, unit: e.target.value })}
           />
           <input
             className="bg-panel p-2 rounded-md text-white"
             placeholder="Price $"
+            type="text"
+            value={form.totalCost}
+            onChange={(e) => setForm({ ...form, totalCost: e.target.value })}
           />
-          <button className="text-white bg-teal p-2 rounded-lg w-1/3 font-bold">
+          <button
+            className="text-white bg-teal p-2 rounded-lg w-1/3 font-bold"
+            onClick={handleSave}
+          >
             Save
           </button>
         </div>
@@ -42,7 +73,7 @@ const Ingredients = () => {
 
       <h3 className="text-sm text-gray-400 mb-4 mt-10">YOUR PANTRY</h3>
       <div className="grid grid-cols-6 gap-3">
-        {ingredients.map((ingredient, index) => (
+        {ingredients.map((ingredient: any, index) => (
           <div className="bg-card p-2 rounded-lg " key={index}>
             <p className="text-white text-base font-medium">
               {ingredient.name}
