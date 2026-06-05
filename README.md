@@ -1,73 +1,105 @@
-# React + TypeScript + Vite
+# PantryAI 🍳
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+> **Smart recipe costing** — manage your pantry ingredients and calculate the exact cost of every recipe you cook.
 
-Currently, two official plugins are available:
+![PantryAI Dashboard](./screenshots/dashboard.png)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+---
 
-## React Compiler
+## Features
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **Dashboard** — overview of your ingredients, recipes, and average cost per serving
+- **Pantry Manager** — add, edit, and delete ingredients with quantity, unit, and price
+- **Recipe Builder** — select ingredients, set quantities used, and get an instant cost breakdown
+- **Cost Breakdown** — see exactly how much each ingredient contributes to a recipe
+- **Responsive** — works on desktop and mobile
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Tech Stack
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+- **Frontend** — React + TypeScript
+- **Styling** — Tailwind CSS v3
+- **Bundler** — Vite
+- **State** — React useState (lifted to App.tsx)
+- **Database** — Supabase (coming soon)
+- **Auth** — Supabase Auth (coming soon)
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+---
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## Screenshots
+
+### Dashboard
+
+(![Dashboard](image.png))
+
+### Pantry Manager
+
+![Pantry](image-2.png)
+
+### Recipe Builder
+
+![Recipe Builder](image-3.png)
+
+---
+
+## Getting Started
+
+### Prerequisites
+
+- Node.js v20+
+- npm v10+
+
+### Installation
+
+```bash
+# Clone the repo
+git clone https://github.com/syedatahreem/Pantry-AI
+
+# Navigate to the project
+cd recipe-cost-calculator
+
+# Install dependencies
+npm install
+
+# Start the dev server
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+Open [http://localhost:5173](http://localhost:5173) in your browser.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+---
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## Project Structure
+
 ```
+src/
+├── components/
+│   ├── layout/
+│   │   ├── Layout.tsx
+│   │   └── Sidebar.tsx
+│   ├── Dashboard/
+│   │   └── Dashboard.tsx
+│   ├── Pantry/
+│   │   └── Pantry.tsx
+│   └── RecipeBuilder/
+│       └── RecipeBuilder.tsx
+├── types/
+│   └── index.ts
+└── App.tsx
+```
+
+---
+
+## Roadmap
+
+- [x] Pantry ingredient management
+- [x] Recipe cost calculator
+- [x] Real-time cost breakdown
+- [ ] Supabase database integration
+- [ ] User authentication
+- [ ] Edit and delete recipes
+- [ ] Mobile responsive layout
+- [ ] AI-generated recipes (Gemini API)
+
+---
