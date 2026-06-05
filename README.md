@@ -2,7 +2,6 @@
 
 > **Smart recipe costing** — manage your pantry ingredients and calculate the exact cost of every recipe you cook.
 
-![PantryAI Dashboard](./screenshots/dashboard.png)
 
 ---
 
@@ -31,7 +30,7 @@
 
 ### Dashboard
 
-(![Dashboard](image.png))
+![Dashboard](image.png)
 
 ### Pantry Manager
 
