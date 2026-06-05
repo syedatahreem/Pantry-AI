@@ -36,8 +36,9 @@ const RecipeCostBuilder = ({
       <h3 className="text-sm text-gray-400 mb-4">RECIPE BUILDER</h3>
       <div className="flex gap-4">
         <input
-          className="bg-panel p-2 rounded-md text-white"
+          className="bg-slate-50 p-2 rounded-md text-white"
           placeholder="Recipe name"
+          bg-slate-50
           type="text"
           value={selectedItems.name}
           onChange={(e) =>
@@ -45,7 +46,7 @@ const RecipeCostBuilder = ({
           }
         />
         <input
-          className="bg-panel p-2 rounded-md  text-white"
+          className="bg-slate-50  p-2 rounded-md  text-white"
           placeholder="No of servings"
           type="text"
           value={selectedItems.servings}

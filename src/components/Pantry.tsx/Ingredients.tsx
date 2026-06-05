@@ -35,28 +35,28 @@ const Ingredients = ({ ingredients, setIngredients }: IngredientProps) => {
 
         <div className="flex gap-4">
           <input
-            className="bg-panel p-2 rounded-md text-white"
+            className="bg-slate-50  p-2 rounded-md text-slate-900 "
             placeholder="Ingredient name"
             type="text"
             value={form.name}
             onChange={(e) => setForm({ ...form, name: e.target.value })}
           />
           <input
-            className="bg-panel p-2 rounded-md  text-white"
+            className="bg-slate-50  p-2 rounded-md  text-slate-900 "
             placeholder="Quantity"
             type="text"
             value={form.quantity}
             onChange={(e) => setForm({ ...form, quantity: e.target.value })}
           />
           <input
-            className="bg-panel p-2 rounded-md text-white"
+            className="bg-slate-50 p-2 rounded-md text-slate-900 "
             placeholder="Unit"
             type="text"
             value={form.unit}
             onChange={(e) => setForm({ ...form, unit: e.target.value })}
           />
           <input
-            className="bg-panel p-2 rounded-md text-white"
+            className="bg-slate-50 p-2 rounded-md text-slate-900"
             placeholder="Price $"
             type="text"
             value={form.totalCost}

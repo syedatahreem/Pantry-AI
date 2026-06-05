@@ -3,16 +3,23 @@ import type { SavedRecipe } from "../../types";
 const user = "Tahreem";
 
 const statList = [
-  { label: "Ingredients", value: "12" },
-  { label: "Recipes", value: "4" },
-  { label: "Avg cost", value: "$3.20", teal: true },
+  { label: "Ingredients"},
+  { label: "Recipes" },
+  { label: "Avg cost", teal: true },
 ];
 
 type InputProps = {
   recipes: SavedRecipe[];
-};
+  ingredientsLength:number;}
 
-const Dashboard = ({ recipes }: InputProps) => {
+const Dashboard = ({ recipes, ingredientsLength }: InputProps) => {
+
+  const statList = [
+  { label: "Ingredients", value: ingredientsLength},
+  { label: "Recipes",value: recipes.length },
+  { label: "Avg cost", value: recipes.length, teal: true },
+];
+
   return (
     <div className="min-h-screen px-6 pb-6">
       <h1 className="text-2xl font-semibold text-white">Good day, {user}</h1>
@@ -20,9 +27,9 @@ const Dashboard = ({ recipes }: InputProps) => {
 
       <h3 className="mt-4 mb-2 text-sm text-gray-400">OVERVIEW</h3>
       <div className="flex gap-3">
-        {statList.map((item) => (
+        {[...statList].map((item) => (
           <div className="bg-card rounded-2xl p-4 flex-1">
-            <p className="text-muted  font-bold text-sm">{item.label}</p>
+            <p className="text-muted  font-bold text-sm">{item?.label}</p>
             <p
               className="text-2xl font-medium mt-1"
               style={{ color: item.teal ? "var(--color-teal)" : "#f1f5f9" }}
