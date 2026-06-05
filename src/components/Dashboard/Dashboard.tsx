@@ -1,3 +1,5 @@
+import type { SavedRecipe } from "../../types";
+
 const user = "Tahreem";
 
 const statList = [
@@ -6,13 +8,11 @@ const statList = [
   { label: "Avg cost", value: "$3.20", teal: true },
 ];
 
-const recipes = [
-  { name: "Chicken curry", servings: "2", totalCost: "$3.20" },
-  { name: "Pasta bolognese", servings: "3", totalCost: "$4.20" },
-  { name: "Veggie stir fry", servings: "4", totalCost: "$7.20" },
-];
+type InputProps = {
+  recipes: SavedRecipe[];
+};
 
-const Dashboard = () => {
+const Dashboard = ({ recipes }: InputProps) => {
   return (
     <div className="min-h-screen px-6 pb-6">
       <h1 className="text-2xl font-semibold text-white">Good day, {user}</h1>
@@ -35,12 +35,15 @@ const Dashboard = () => {
       <h3 className="mt-4 mb-2 text-sm text-gray-400">SAVED RECIPES</h3>
       <div className="flex flex-col gap-3 ">
         {recipes.map((recipe) => (
-          <div className="bg-card rounded-2xl p-4 flex-1 flex justify-between">
+          <div
+            className="bg-card rounded-2xl p-4 flex-1 flex justify-between"
+            key={recipe.id}
+          >
             <div>
               <p className="text-muted font-bold text-sm">{recipe.name}</p>
               <p className="text-muted text-xs">{recipe.servings} servings</p>
             </div>
-            <p className="text-teal font-bold text-sm">{recipe.totalCost}</p>
+            <p className="text-teal font-bold text-sm">{"$3.2"}</p>
           </div>
         ))}
       </div>
