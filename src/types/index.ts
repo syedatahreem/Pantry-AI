@@ -19,4 +19,11 @@ export interface Recipe {
   costPerServing: number;
 }
 
+export type SavedRecipe = {
+  id: string;
+  name: string;
+  servings: string;
+  recipes: { id: string }[];
+};
+
 export type Pages = "dashboard" | "pantry" | "recipe-builder";

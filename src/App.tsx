@@ -2,28 +2,18 @@ import { useState } from "react";
 import "./App.css";
 import Layout from "./components/Layout/Layout";
 import Dashboard from "./components/Dashboard/Dashboard";
-import type { IngredientsType, Pages } from "./types";
+import type { IngredientsType, Pages, SavedRecipe } from "./types";
 import Ingredients from "./components/Pantry.tsx/Ingredients";
 import RecipeCostBuilder from "./components/RecipeCostBuilder/RecipeCostBuilder";
-
-export const ingredients = [
-  { name: "Chicken", quantity: "200", unit: "g", totalCost: "$3.20" },
-  { name: "Pasta", quantity: "3", unit: "kg", totalCost: "$4.20" },
-  { name: "Tomatoes", quantity: "450", unit: "g", totalCost: "$7.20" },
-  { name: "Onions", quantity: "450", unit: "g", totalCost: "$7.20" },
-  { name: "Chicken", quantity: "200", unit: "g", totalCost: "$3.20" },
-  { name: "Pasta", quantity: "3", unit: "kg", totalCost: "$4.20" },
-  { name: "Tomatoes", quantity: "450", unit: "g", totalCost: "$7.20" },
-  { name: "Onions", quantity: "450", unit: "g", totalCost: "$7.20" },
-];
 
 function App() {
   const [activeTab, setActiveTab] = useState<Pages>("dashboard");
   const [ingredients, setIngredients] = useState<IngredientsType[]>([]);
+  const [recipes, setRecipes] = useState<SavedRecipe[]>([]);
 
   return (
     <Layout activeTab={activeTab} setActiveTab={setActiveTab}>
-      {activeTab === "dashboard" && <Dashboard />}
+      {activeTab === "dashboard" && <Dashboard recipes={recipes} />}
       {activeTab === "pantry" && (
         <Ingredients
           ingredients={ingredients}
@@ -31,7 +21,7 @@ function App() {
         />
       )}
       {activeTab === "recipe-builder" && (
-        <RecipeCostBuilder ingredients={ingredients} />
+        <RecipeCostBuilder ingredients={ingredients} recipes={recipes} setRecipes={setRecipes} />
       )}
     </Layout>
   );
