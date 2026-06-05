@@ -2,23 +2,22 @@ import type { SavedRecipe } from "../../types";
 
 const user = "Tahreem";
 
-const statList = [
-  { label: "Ingredients"},
-  { label: "Recipes" },
-  { label: "Avg cost", teal: true },
-];
-
 type InputProps = {
   recipes: SavedRecipe[];
-  ingredientsLength:number;}
+  ingredientsLength: number;
+};
 
 const Dashboard = ({ recipes, ingredientsLength }: InputProps) => {
+  const totalCostOfRecipes = recipes.reduce(
+    (acc, item) => acc + item.costPerServing,
+    0,
+  );
 
   const statList = [
-  { label: "Ingredients", value: ingredientsLength},
-  { label: "Recipes",value: recipes.length },
-  { label: "Avg cost", value: recipes.length, teal: true },
-];
+    { label: "Ingredients", value: ingredientsLength },
+    { label: "Recipes", value: recipes.length },
+    { label: "Avg cost", value: totalCostOfRecipes.toFixed(2), teal: true },
+  ];
 
   return (
     <div className="min-h-screen px-6 pb-6">
@@ -50,7 +49,9 @@ const Dashboard = ({ recipes, ingredientsLength }: InputProps) => {
               <p className="text-muted font-bold text-sm">{recipe.name}</p>
               <p className="text-muted text-xs">{recipe.servings} servings</p>
             </div>
-            <p className="text-teal font-bold text-sm">{"$3.2"}</p>
+            <p className="text-teal font-bold text-sm">
+              {recipe.costPerServing}
+            </p>
           </div>
         ))}
       </div>

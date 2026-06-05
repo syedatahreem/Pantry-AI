@@ -24,6 +24,7 @@ export type SavedRecipe = {
   name: string;
   servings: string;
   recipes: { id: string }[];
+  costPerServing: number;
 };
 
 export type Pages = "dashboard" | "pantry" | "recipe-builder";

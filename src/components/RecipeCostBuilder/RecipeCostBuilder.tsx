@@ -17,7 +17,18 @@ const RecipeCostBuilder = ({
     name: "",
     servings: "",
     recipes: [],
+    costPerServing: 0,
   });
+
+  const totalCost = selectedItems.recipes.reduce((sum, selectedItem) => {
+    const ingredient = ingredients.find((ing) => ing.id === selectedItem.id);
+    if (!ingredient) return sum;
+    return sum + Number(ingredient.totalCost);
+  }, 0);
+
+  const costPerServing: number =
+    totalCost /
+    (selectedItems.servings === "" ? 1 : Number(selectedItems.servings));
 
   const saveRecipe = () => {
     if (
@@ -26,9 +37,19 @@ const RecipeCostBuilder = ({
       selectedItems.recipes.length <= 0
     )
       return;
-    const newRecipe = { ...selectedItems, id: crypto.randomUUID() };
+    const newRecipe = {
+      ...selectedItems,
+      id: crypto.randomUUID(),
+      costPerServing: costPerServing,
+    };
     setRecipes([...recipes, newRecipe]);
-    setSelectedItems({ id: "", name: "", servings: "", recipes: [] });
+    setSelectedItems({
+      id: "",
+      name: "",
+      servings: "",
+      recipes: [],
+      costPerServing: 0,
+    });
   };
 
   return (
@@ -36,7 +57,7 @@ const RecipeCostBuilder = ({
       <h3 className="text-sm text-gray-400 mb-4">RECIPE BUILDER</h3>
       <div className="flex gap-4">
         <input
-          className="bg-slate-50 p-2 rounded-md text-white"
+          className="bg-slate-50 p-2 rounded-md text-slate-900"
           placeholder="Recipe name"
           bg-slate-50
           type="text"
@@ -46,7 +67,7 @@ const RecipeCostBuilder = ({
           }
         />
         <input
-          className="bg-slate-50  p-2 rounded-md  text-white"
+          className="bg-slate-50  p-2 rounded-md  text-slate-900"
           placeholder="No of servings"
           type="text"
           value={selectedItems.servings}
@@ -98,7 +119,9 @@ const RecipeCostBuilder = ({
         </div>
         <div className="text-white flex justify-between text-base mt-4">
           <p>Cost per serving</p>
-          <p className="text-teal">$2.70</p>
+          <p className="text-teal">
+            {selectedItems.recipes.length > 0 ? `${costPerServing}` : ""}
+          </p>
         </div>
       </div>
       <button
