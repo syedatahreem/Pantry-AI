@@ -122,9 +122,11 @@ const RecipeCostBuilder = ({
           )}
         </div>
         <input
-          className="bg-slate-50  p-2 rounded-md  text-slate-900"
+          className="bg-slate-50 p-2 rounded-md text-slate-900"
           placeholder="No of servings"
-          type="text"
+          type="number"
+          min="1"
+          step="1"
           value={selectedItems.servings === 0 ? "" : selectedItems.servings}
           onChange={(e) =>
             setSelectedItems({

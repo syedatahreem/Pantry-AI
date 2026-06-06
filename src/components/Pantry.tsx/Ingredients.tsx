@@ -57,7 +57,7 @@ const Ingredients = ({ ingredients, setIngredients }: IngredientProps) => {
       <div className="flex flex-col gap-4 space-between rounded-xl bg-card p-6">
         <p className="text-white ">Add new ingredient</p>
 
-        <div className="flex gap-4">
+        <div className="flex gap-2">
           <div className="relative">
             <input
               className="bg-slate-50 p-2 pr-8 rounded-md text-slate-900 w-full"
@@ -99,14 +99,17 @@ const Ingredients = ({ ingredients, setIngredients }: IngredientProps) => {
             )}
           </div>
           <input
-            className="bg-slate-50  p-2 rounded-md  text-slate-900 "
+            className="bg-slate-50 p-2 rounded-md text-slate-900"
             placeholder="Quantity"
-            type="text"
+            type="number"
+            min="0"
+            step="0.1"
             value={form.quantity === 0 ? "" : form.quantity}
             onChange={(e) =>
               setForm({ ...form, quantity: Number(e.target.value) })
             }
           />
+
           <select
             className="bg-slate-50 p-2 rounded-md text-slate-900 appearance-none cursor-pointer pr-8 bg-no-repeat bg-right"
             style={{
@@ -125,8 +128,10 @@ const Ingredients = ({ ingredients, setIngredients }: IngredientProps) => {
           </select>
           <input
             className="bg-slate-50 p-2 rounded-md text-slate-900"
-            placeholder="Price"
-            type="text"
+            placeholder="Price $"
+            type="number"
+            min="0"
+            step="0.1"
             value={form.totalCost === 0 ? "" : form.totalCost}
             onChange={(e) =>
               setForm({ ...form, totalCost: Number(e.target.value) })
