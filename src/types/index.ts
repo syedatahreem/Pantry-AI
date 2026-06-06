@@ -24,7 +24,7 @@ export interface Recipe {
 export type SavedRecipe = {
   id: string;
   name: string;
-  servings: string;
+  servings: number;
   recipes: { id: string }[];
   costPerServing: number;
 };

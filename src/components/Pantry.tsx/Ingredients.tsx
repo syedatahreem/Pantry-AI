@@ -125,7 +125,7 @@ const Ingredients = ({ ingredients, setIngredients }: IngredientProps) => {
           </select>
           <input
             className="bg-slate-50 p-2 rounded-md text-slate-900"
-            placeholder="Price $"
+            placeholder="Price"
             type="text"
             value={form.totalCost === 0 ? "" : form.totalCost}
             onChange={(e) =>
