@@ -139,30 +139,33 @@ const RecipeCostBuilder = ({
             }
           />
         </div>
-      </div>
-      <h3 className="text-sm text-gray-400 mt-8 mb-4">
-        SELECT INGREDIENTS USED
-      </h3>
-      <div className="grid grid-cols-4 gap-3">
-        {ingredients.map((ingredient) => (
-          <button
-            className={`bg-card p-3 rounded-lg flex justify-between items-center cursor-pointer ${
-              selectedItems.recipes.some((r) => r.id === ingredient.id)
-                ? "bg-teal border border-teal-400"
-                : "bg-card"
-            }`}
-            key={ingredient.id}
-            onClick={() =>
-              setSelectedItems({
-                ...selectedItems,
-                recipes: [...selectedItems.recipes, { id: ingredient.id }],
-              })
-            }
-          >
-            <p>{ingredient.name}</p>
-            <p className="text-teal">{ingredient.quantity + ingredient.unit}</p>
-          </button>
-        ))}
+
+        <h3 className="text-sm text-gray-400 mt-8 mb-4">
+          SELECT INGREDIENTS USED
+        </h3>
+        <div className="grid grid-cols-4 gap-3">
+          {ingredients.map((ingredient) => (
+            <button
+              className={`bg-card p-3 rounded-lg flex justify-between items-center cursor-pointer ${
+                selectedItems.recipes.some((r) => r.id === ingredient.id)
+                  ? "bg-teal border border-teal-400"
+                  : "bg-card"
+              }`}
+              key={ingredient.id}
+              onClick={() =>
+                setSelectedItems({
+                  ...selectedItems,
+                  recipes: [...selectedItems.recipes, { id: ingredient.id }],
+                })
+              }
+            >
+              <p>{ingredient.name}</p>
+              <p className="text-teal">
+                {ingredient.quantity + ingredient.unit}
+              </p>
+            </button>
+          ))}
+        </div>
       </div>
       <div className="bg-breakdown w-1/2 mt-10 rounded-xl p-4">
         <p className="text-teal mb-4">Cost breakdown</p>
@@ -181,6 +184,7 @@ const RecipeCostBuilder = ({
             ),
           )}
         </div>
+
         <div className="text-white flex justify-between text-base mt-4">
           <p>Cost per serving</p>
           <p className="text-teal">
