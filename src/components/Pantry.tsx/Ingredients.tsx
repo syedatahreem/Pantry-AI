@@ -54,10 +54,10 @@ const Ingredients = ({ ingredients, setIngredients }: IngredientProps) => {
     <div className="w-full">
       <h3 className="text-sm text-gray-400 mb-4">INGREDIENT MANAGER</h3>
 
-      <div className="flex flex-col gap-4 space-between rounded-xl bg-card p-6">
+      <div className="flex flex-col gap-4 rounded-xl bg-card p-8">
         <p className="text-white ">Add new ingredient</p>
 
-        <div className="flex gap-2">
+        <div className="grid grid-cols-2 gap-6">
           <div className="relative">
             <input
               className="bg-slate-50 p-2 pr-8 rounded-md text-slate-900 w-full"
@@ -138,7 +138,7 @@ const Ingredients = ({ ingredients, setIngredients }: IngredientProps) => {
             }
           />
           <button
-            className="text-white bg-teal p-2 rounded-lg w-1/3 font-bold"
+            className="text-white bg-teal p-2 rounded-lg font-bold"
             onClick={handleSave}
           >
             Save

@@ -78,63 +78,67 @@ const RecipeCostBuilder = ({
   return (
     <div>
       <h3 className="text-sm text-gray-400 mb-4">RECIPE BUILDER</h3>
-      <div className="flex gap-4">
-        <div className="relative">
+
+      <div className="flex flex-col gap-4 rounded-xl bg-card p-8">
+        <p className="text-white ">Add new recipe</p>
+        <div className="grid grid-cols-2 gap-6">
+          <div className="relative">
+            <input
+              className="bg-slate-50 p-2 pr-8 rounded-md text-slate-900 w-full"
+              placeholder="Recipe name"
+              type="text"
+              value={selectedItems.name}
+              onChange={handleRecipeNameChange}
+              onFocus={handleRecipeFocus}
+              onBlur={() =>
+                setTimeout(() => setShowRecipeSuggestions(false), 150)
+              }
+            />
+            <svg
+              className="absolute right-2 top-1/2 -translate-y-1/2 pointer-events-none"
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="#94a3b8"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <polyline points="6 9 12 15 18 9" />
+            </svg>
+            {showRecipeSuggestions && filteredRecipes.length > 0 && (
+              <div className="absolute z-10 w-full bg-slate-50 border border-slate-200 rounded-md mt-1 max-h-48 overflow-y-auto shadow-md">
+                {filteredRecipes.map((item) => (
+                  <div
+                    key={item}
+                    className="px-3 py-2 text-slate-900 text-sm hover:bg-slate-200 cursor-pointer"
+                    onMouseDown={() => {
+                      setSelectedItems({ ...selectedItems, name: item });
+                      setShowRecipeSuggestions(false);
+                    }}
+                  >
+                    {item}
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
           <input
-            className="bg-slate-50 p-2 pr-8 rounded-md text-slate-900 w-full"
-            placeholder="Recipe name"
-            type="text"
-            value={selectedItems.name}
-            onChange={handleRecipeNameChange}
-            onFocus={handleRecipeFocus}
-            onBlur={() =>
-              setTimeout(() => setShowRecipeSuggestions(false), 150)
+            className="bg-slate-50 p-2 rounded-md text-slate-900"
+            placeholder="No of servings"
+            type="number"
+            min="1"
+            step="1"
+            value={selectedItems.servings === 0 ? "" : selectedItems.servings}
+            onChange={(e) =>
+              setSelectedItems({
+                ...selectedItems,
+                servings: Number(e.target.value),
+              })
             }
           />
-          <svg
-            className="absolute right-2 top-1/2 -translate-y-1/2 pointer-events-none"
-            width="16"
-            height="16"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="#94a3b8"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          >
-            <polyline points="6 9 12 15 18 9" />
-          </svg>
-          {showRecipeSuggestions && filteredRecipes.length > 0 && (
-            <div className="absolute z-10 w-full bg-slate-50 border border-slate-200 rounded-md mt-1 max-h-48 overflow-y-auto shadow-md">
-              {filteredRecipes.map((item) => (
-                <div
-                  key={item}
-                  className="px-3 py-2 text-slate-900 text-sm hover:bg-slate-200 cursor-pointer"
-                  onMouseDown={() => {
-                    setSelectedItems({ ...selectedItems, name: item });
-                    setShowRecipeSuggestions(false);
-                  }}
-                >
-                  {item}
-                </div>
-              ))}
-            </div>
-          )}
         </div>
-        <input
-          className="bg-slate-50 p-2 rounded-md text-slate-900"
-          placeholder="No of servings"
-          type="number"
-          min="1"
-          step="1"
-          value={selectedItems.servings === 0 ? "" : selectedItems.servings}
-          onChange={(e) =>
-            setSelectedItems({
-              ...selectedItems,
-              servings: Number(e.target.value),
-            })
-          }
-        />
       </div>
       <h3 className="text-sm text-gray-400 mt-8 mb-4">
         SELECT INGREDIENTS USED
