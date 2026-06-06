@@ -1,5 +1,6 @@
 import { useState } from "react";
 import type { IngredientsType, SavedRecipe } from "../../types";
+import { recipeOptions } from "../../utils/constants";
 
 type InputProps = {
   ingredients: IngredientsType[];
@@ -15,7 +16,7 @@ const RecipeCostBuilder = ({
   const [selectedItems, setSelectedItems] = useState<SavedRecipe>({
     id: "",
     name: "",
-    servings: "",
+    servings: 0,
     recipes: [],
     costPerServing: 0,
   });
@@ -27,8 +28,7 @@ const RecipeCostBuilder = ({
   }, 0);
 
   const costPerServing: number =
-    totalCost /
-    (selectedItems.servings === "" ? 1 : Number(selectedItems.servings));
+    totalCost / (selectedItems.servings === 0 ? 1 : selectedItems.servings);
 
   const saveRecipe = () => {
     if (
@@ -46,33 +46,91 @@ const RecipeCostBuilder = ({
     setSelectedItems({
       id: "",
       name: "",
-      servings: "",
+      servings: 0,
       recipes: [],
       costPerServing: 0,
     });
   };
+  const [showRecipeSuggestions, setShowRecipeSuggestions] = useState(false);
+  const [filteredRecipes, setFilteredRecipes] = useState<string[]>([]);
 
+  const handleRecipeNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    setSelectedItems({ ...selectedItems, name: value });
+    setFilteredRecipes(
+      recipeOptions.filter((r) =>
+        r.toLowerCase().includes(value.toLowerCase()),
+      ),
+    );
+    setShowRecipeSuggestions(true);
+  };
+
+  const handleRecipeFocus = () => {
+    setFilteredRecipes(
+      selectedItems.name
+        ? recipeOptions.filter((r) =>
+            r.toLowerCase().includes(selectedItems.name.toLowerCase()),
+          )
+        : recipeOptions,
+    );
+    setShowRecipeSuggestions(true);
+  };
   return (
     <div>
       <h3 className="text-sm text-gray-400 mb-4">RECIPE BUILDER</h3>
       <div className="flex gap-4">
-        <input
-          className="bg-slate-50 p-2 rounded-md text-slate-900"
-          placeholder="Recipe name"
-          bg-slate-50
-          type="text"
-          value={selectedItems.name}
-          onChange={(e) =>
-            setSelectedItems({ ...selectedItems, name: e.target.value })
-          }
-        />
+        <div className="relative">
+          <input
+            className="bg-slate-50 p-2 pr-8 rounded-md text-slate-900 w-full"
+            placeholder="Recipe name"
+            type="text"
+            value={selectedItems.name}
+            onChange={handleRecipeNameChange}
+            onFocus={handleRecipeFocus}
+            onBlur={() =>
+              setTimeout(() => setShowRecipeSuggestions(false), 150)
+            }
+          />
+          <svg
+            className="absolute right-2 top-1/2 -translate-y-1/2 pointer-events-none"
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="#94a3b8"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <polyline points="6 9 12 15 18 9" />
+          </svg>
+          {showRecipeSuggestions && filteredRecipes.length > 0 && (
+            <div className="absolute z-10 w-full bg-slate-50 border border-slate-200 rounded-md mt-1 max-h-48 overflow-y-auto shadow-md">
+              {filteredRecipes.map((item) => (
+                <div
+                  key={item}
+                  className="px-3 py-2 text-slate-900 text-sm hover:bg-slate-200 cursor-pointer"
+                  onMouseDown={() => {
+                    setSelectedItems({ ...selectedItems, name: item });
+                    setShowRecipeSuggestions(false);
+                  }}
+                >
+                  {item}
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
         <input
           className="bg-slate-50  p-2 rounded-md  text-slate-900"
           placeholder="No of servings"
           type="text"
-          value={selectedItems.servings}
+          value={selectedItems.servings === 0 ? "" : selectedItems.servings}
           onChange={(e) =>
-            setSelectedItems({ ...selectedItems, servings: e.target.value })
+            setSelectedItems({
+              ...selectedItems,
+              servings: Number(e.target.value),
+            })
           }
         />
       </div>
