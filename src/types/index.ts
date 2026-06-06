@@ -1,10 +1,12 @@
 export interface IngredientsType {
   id: string;
   name: string;
-  unit: string;
-  quantity: string;
-  totalCost: string;
+  unit: Units;
+  quantity: number;
+  totalCost: number;
 }
+
+export type Units = "kg" | "grams" | "ml" | "litre";
 
 export interface RecipeIngredient {
   ingredientId: string;
