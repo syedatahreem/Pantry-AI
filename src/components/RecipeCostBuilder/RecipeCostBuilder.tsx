@@ -146,10 +146,10 @@ const RecipeCostBuilder = ({
         <div className="grid grid-cols-4 gap-3">
           {ingredients.map((ingredient) => (
             <button
-              className={`bg-card p-3 rounded-lg flex justify-between items-center cursor-pointer ${
+              className={`bg-card p-2 rounded-lg flex justify-between items-center text-white cursor-pointer ${
                 selectedItems.recipes.some((r) => r.id === ingredient.id)
                   ? "bg-teal border border-teal-400"
-                  : "bg-card"
+                  : "bg-card  border border-white"
               }`}
               key={ingredient.id}
               onClick={() =>
