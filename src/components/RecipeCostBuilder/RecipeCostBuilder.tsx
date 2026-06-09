@@ -23,13 +23,14 @@ const RecipeCostBuilder = ({
     costPerServing: 0,
   });
 
-  const [isEditing, setIsEditing] = useState(false);
-  const [useQuantity, setUseQuantity] = useState(0);
+  const [editingId, setEditingId] = useState<string | null>(null);
 
   const totalCost = selectedItems.recipes.reduce((sum, selectedItem) => {
     const ingredient = ingredients.find((ing) => ing.id === selectedItem.id);
     if (!ingredient) return sum;
-    return sum + Number(ingredient.totalCost);
+    const quantityUsed = selectedItem.quantityUsed || ingredient.quantity;
+    const costPerUnit = ingredient.totalCost / ingredient.quantity;
+    return sum + costPerUnit * quantityUsed;
   }, 0);
 
   const costPerServing: number =
@@ -158,39 +159,61 @@ const RecipeCostBuilder = ({
               }`}
               key={ingredient.id}
               onClick={() => {
-                setSelectedItems({
-                  ...selectedItems,
-                  recipes: [...selectedItems.recipes, { id: ingredient.id }],
-                });
+                const idExists = selectedItems.recipes.findIndex(
+                  (recipe) => recipe.id === ingredient.id,
+                );
+                if (idExists === -1) {
+                  setSelectedItems({
+                    ...selectedItems,
+                    recipes: [...selectedItems.recipes, { id: ingredient.id }],
+                  });
+                }
               }}
             >
               <p>{ingredient.name}</p>
               <div className="flex gap-4 items-center">
-                {isEditing ? (
+                {editingId === ingredient.id ? (
                   <>
                     <input
-                      placeholder="Quantity"
+                      placeholder="0"
                       type="number"
                       min="0"
                       step="0.1"
                       className="text-white bg-panel w-16 rounded px-2 py-1 text-sm"
-                      value={useQuantity}
-                      onChange={(e) => setUseQuantity(Number(e.target.value))}
+                      value={
+                        selectedItems.recipes.find(
+                          (r) => r.id === ingredient.id,
+                        )?.quantityUsed || ""
+                      }
+                      onChange={(e) => {
+                        setSelectedItems({
+                          ...selectedItems,
+                          recipes: selectedItems.recipes.map((r) =>
+                            r.id === ingredient.id
+                              ? { ...r, quantityUsed: Number(e.target.value) }
+                              : r,
+                          ),
+                        });
+                      }}
                       onClick={(e) => e.stopPropagation()}
-                      onBlur={() => setIsEditing(false)}
+                      onBlur={() => setEditingId(null)}
                     />
                     <p> {ingredient.unit}</p>
                   </>
                 ) : (
-                  <p className="text-white">
-                    {useQuantity !== 0 ? useQuantity : ingredient.quantity}
+                  <p className="text-white text-sm">
+                    {selectedItems.recipes.find(
+                      (recipe) => recipe.id === ingredient.id,
+                    )?.quantityUsed || ingredient.quantity}
+                    {" / "}
+                    {ingredient.quantity}
                     {" " + ingredient.unit}
                   </p>
                 )}
                 <EditIcon
                   onClick={(e: any) => {
                     e.stopPropagation();
-                    setIsEditing(true);
+                    setEditingId(ingredient.id);
                   }}
                 />
                 <DeleteIcon
@@ -218,9 +241,16 @@ const RecipeCostBuilder = ({
                 ingredient.id === selectItem.id && (
                   <div className="flex  justify-between">
                     <p>
-                      {ingredient.name}({ingredient.quantity + ingredient.unit})
+                      {ingredient.name}(
+                      {selectItem.quantityUsed || ingredient.quantity}
+                      {ingredient.unit})
                     </p>
-                    <p>{ingredient.totalCost}</p>
+                    <p>
+                      {selectItem.quantityUsed
+                        ? (selectItem.quantityUsed * ingredient.totalCost) /
+                          ingredient.quantity
+                        : ingredient.totalCost}
+                    </p>
                   </div>
                 ),
             ),
@@ -230,7 +260,9 @@ const RecipeCostBuilder = ({
         <div className="text-white flex justify-between text-base mt-4">
           <p>Cost per serving</p>
           <p className="text-teal">
-            {selectedItems.recipes.length > 0 ? `${costPerServing}` : ""}
+            {selectedItems.recipes.length > 0
+              ? `${costPerServing.toFixed(2)}`
+              : ""}
           </p>
         </div>
       </div>
