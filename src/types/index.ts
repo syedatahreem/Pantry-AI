@@ -25,7 +25,7 @@ export type SavedRecipe = {
   id: string;
   name: string;
   servings: number;
-  recipes: { id: string }[];
+  recipes: { id: string; quantityUsed?: number }[];
   costPerServing: number;
 };
 
