@@ -1,6 +1,8 @@
 import { useState } from "react";
 import type { IngredientsType, SavedRecipe } from "../../types";
 import { recipeOptions } from "../../utils/constants";
+import EditIcon from "../ui/EditIcon";
+import DeleteIcon from "../ui/DeleteIcon";
 
 type InputProps = {
   ingredients: IngredientsType[];
@@ -20,6 +22,9 @@ const RecipeCostBuilder = ({
     recipes: [],
     costPerServing: 0,
   });
+
+  const [isEditing, setIsEditing] = useState(false);
+  const [useQuantity, setUseQuantity] = useState(0);
 
   const totalCost = selectedItems.recipes.reduce((sum, selectedItem) => {
     const ingredient = ingredients.find((ing) => ing.id === selectedItem.id);
@@ -143,7 +148,7 @@ const RecipeCostBuilder = ({
         <h3 className="text-sm text-gray-400 mt-8 mb-4">
           SELECT INGREDIENTS USED
         </h3>
-        <div className="grid grid-cols-4 gap-3">
+        <div className="grid grid-cols-3 gap-3">
           {ingredients.map((ingredient) => (
             <button
               className={`bg-card p-2 rounded-lg flex justify-between items-center text-white cursor-pointer ${
@@ -152,17 +157,54 @@ const RecipeCostBuilder = ({
                   : "bg-card  border border-white"
               }`}
               key={ingredient.id}
-              onClick={() =>
+              onClick={() => {
                 setSelectedItems({
                   ...selectedItems,
                   recipes: [...selectedItems.recipes, { id: ingredient.id }],
-                })
-              }
+                });
+              }}
             >
               <p>{ingredient.name}</p>
-              <p className="text-teal">
-                {ingredient.quantity + ingredient.unit}
-              </p>
+              <div className="flex gap-4 items-center">
+                {isEditing ? (
+                  <>
+                    <input
+                      placeholder="Quantity"
+                      type="number"
+                      min="0"
+                      step="0.1"
+                      className="text-white bg-panel w-16 rounded px-2 py-1 text-sm"
+                      value={useQuantity}
+                      onChange={(e) => setUseQuantity(Number(e.target.value))}
+                      onClick={(e) => e.stopPropagation()}
+                      onBlur={() => setIsEditing(false)}
+                    />
+                    <p> {ingredient.unit}</p>
+                  </>
+                ) : (
+                  <p className="text-white">
+                    {useQuantity !== 0 ? useQuantity : ingredient.quantity}
+                    {" " + ingredient.unit}
+                  </p>
+                )}
+                <EditIcon
+                  onClick={(e: any) => {
+                    e.stopPropagation();
+                    setIsEditing(true);
+                  }}
+                />
+                <DeleteIcon
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setSelectedItems({
+                      ...selectedItems,
+                      recipes: selectedItems.recipes.filter(
+                        (recipe) => recipe.id !== ingredient.id,
+                      ),
+                    });
+                  }}
+                />
+              </div>
             </button>
           ))}
         </div>
