@@ -50,7 +50,7 @@ const Dashboard = ({ recipes, ingredientsLength }: InputProps) => {
               <p className="text-muted text-xs">{recipe.servings} servings</p>
             </div>
             <p className="text-teal font-bold text-sm">
-              {recipe.costPerServing}
+              {recipe.costPerServing.toFixed(2)}
             </p>
           </div>
         ))}
