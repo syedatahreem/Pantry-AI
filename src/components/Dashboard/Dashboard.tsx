@@ -1,13 +1,18 @@
-import type { SavedRecipe } from "../../types";
+import type { Pages, SavedRecipe } from "../../types";
 
 const user = "Tahreem";
 
 type InputProps = {
   recipes: SavedRecipe[];
   ingredientsLength: number;
+  setActiveTab: React.Dispatch<React.SetStateAction<Pages>>;
 };
 
-const Dashboard = ({ recipes, ingredientsLength }: InputProps) => {
+const Dashboard = ({
+  recipes,
+  ingredientsLength,
+  setActiveTab,
+}: InputProps) => {
   const totalCostOfRecipes = recipes.reduce(
     (acc, item) => acc + item.costPerServing,
     0,
@@ -55,7 +60,10 @@ const Dashboard = ({ recipes, ingredientsLength }: InputProps) => {
           </div>
         ))}
       </div>
-      <button className="bg-card text-teal rounded-2xl p-4 mt-4 w-full text-center">
+      <button
+        className="bg-card text-teal rounded-2xl p-4 mt-4 w-full text-center"
+        onClick={() => setActiveTab("recipe-builder")}
+      >
         + New recipe
       </button>
     </div>

@@ -14,7 +14,11 @@ function App() {
   return (
     <Layout activeTab={activeTab} setActiveTab={setActiveTab}>
       {activeTab === "dashboard" && (
-        <Dashboard recipes={recipes} ingredientsLength={ingredients.length} />
+        <Dashboard
+          recipes={recipes}
+          ingredientsLength={ingredients.length}
+          setActiveTab={setActiveTab}
+        />
       )}
       {activeTab === "pantry" && (
         <Ingredients
