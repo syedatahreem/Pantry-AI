@@ -217,6 +217,7 @@ const RecipeCostBuilder = ({
                       type="number"
                       min="0"
                       step="0.1"
+                      max={ingredient.quantity}
                       className="text-white bg-panel w-16 rounded px-2 py-1 text-sm"
                       value={
                         selectedItems.recipes.find(
