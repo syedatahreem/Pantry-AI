@@ -227,6 +227,10 @@ const RecipeCostBuilder = ({
                         ""
                       }
                       onChange={(e) => {
+                        const value = Math.min(
+                          Number(e.target.value),
+                          ingredient.quantity,
+                        );
                         const isSelected = selectedItems.recipes.some(
                           (r) => r.id === ingredient.id,
                         );
@@ -235,14 +239,14 @@ const RecipeCostBuilder = ({
                             ...selectedItems,
                             recipes: selectedItems.recipes.map((r) =>
                               r.id === ingredient.id
-                                ? { ...r, quantityUsed: Number(e.target.value) }
+                                ? { ...r, quantityUsed: value }
                                 : r,
                             ),
                           });
                         } else {
                           setPendingQuantities({
                             ...pendingQuantities,
-                            [ingredient.id]: Number(e.target.value),
+                            [ingredient.id]: value,
                           });
                         }
                       }}
