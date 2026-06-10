@@ -8,12 +8,14 @@ type InputProps = {
   ingredients: IngredientsType[];
   recipes: SavedRecipe[];
   setRecipes: React.Dispatch<React.SetStateAction<SavedRecipe[]>>;
+  setIngredients: React.Dispatch<React.SetStateAction<IngredientsType[]>>;
 };
 
 const RecipeCostBuilder = ({
   ingredients,
   recipes,
   setRecipes,
+  setIngredients,
 }: InputProps) => {
   const [selectedItems, setSelectedItems] = useState<SavedRecipe>({
     id: "",
@@ -24,6 +26,9 @@ const RecipeCostBuilder = ({
   });
 
   const [editingId, setEditingId] = useState<string | null>(null);
+  const [pendingQuantities, setPendingQuantities] = useState<
+    Record<string, number>
+  >({});
 
   const totalCost = selectedItems.recipes.reduce((sum, selectedItem) => {
     const ingredient = ingredients.find((ing) => ing.id === selectedItem.id);
@@ -43,11 +48,28 @@ const RecipeCostBuilder = ({
       selectedItems.recipes.length <= 0
     )
       return;
+
     const newRecipe = {
       ...selectedItems,
       id: crypto.randomUUID(),
       costPerServing: costPerServing,
     };
+
+    setIngredients(
+      ingredients.map((ingredient) => {
+        const used = selectedItems.recipes.find((r) => r.id === ingredient.id);
+        if (!used) return ingredient;
+        return {
+          ...ingredient,
+          quantity: ingredient.quantity - (used.quantityUsed ?? 0),
+          totalCost:
+            ingredient.totalCost *
+            ((ingredient.quantity - (used.quantityUsed ?? 0)) /
+              ingredient.quantity),
+        };
+      }),
+    );
+
     setRecipes([...recipes, newRecipe]);
     setSelectedItems({
       id: "",
@@ -56,7 +78,9 @@ const RecipeCostBuilder = ({
       recipes: [],
       costPerServing: 0,
     });
+    setPendingQuantities({});
   };
+
   const [showRecipeSuggestions, setShowRecipeSuggestions] = useState(false);
   const [filteredRecipes, setFilteredRecipes] = useState<string[]>([]);
 
@@ -159,13 +183,27 @@ const RecipeCostBuilder = ({
               }`}
               key={ingredient.id}
               onClick={() => {
-                const idExists = selectedItems.recipes.findIndex(
-                  (recipe) => recipe.id === ingredient.id,
+                const isSelected = selectedItems.recipes.some(
+                  (r) => r.id === ingredient.id,
                 );
-                if (idExists === -1) {
+
+                if (isSelected) {
                   setSelectedItems({
                     ...selectedItems,
-                    recipes: [...selectedItems.recipes, { id: ingredient.id }],
+                    recipes: selectedItems.recipes.filter(
+                      (r) => r.id !== ingredient.id,
+                    ),
+                  });
+                } else {
+                  setSelectedItems({
+                    ...selectedItems,
+                    recipes: [
+                      ...selectedItems.recipes,
+                      {
+                        id: ingredient.id,
+                        quantityUsed: pendingQuantities[ingredient.id] ?? 0,
+                      },
+                    ],
                   });
                 }
               }}
@@ -183,17 +221,29 @@ const RecipeCostBuilder = ({
                       value={
                         selectedItems.recipes.find(
                           (r) => r.id === ingredient.id,
-                        )?.quantityUsed || ""
+                        )?.quantityUsed ||
+                        pendingQuantities[ingredient.id] ||
+                        ""
                       }
                       onChange={(e) => {
-                        setSelectedItems({
-                          ...selectedItems,
-                          recipes: selectedItems.recipes.map((r) =>
-                            r.id === ingredient.id
-                              ? { ...r, quantityUsed: Number(e.target.value) }
-                              : r,
-                          ),
-                        });
+                        const isSelected = selectedItems.recipes.some(
+                          (r) => r.id === ingredient.id,
+                        );
+                        if (isSelected) {
+                          setSelectedItems({
+                            ...selectedItems,
+                            recipes: selectedItems.recipes.map((r) =>
+                              r.id === ingredient.id
+                                ? { ...r, quantityUsed: Number(e.target.value) }
+                                : r,
+                            ),
+                          });
+                        } else {
+                          setPendingQuantities({
+                            ...pendingQuantities,
+                            [ingredient.id]: Number(e.target.value),
+                          });
+                        }
                       }}
                       onClick={(e) => e.stopPropagation()}
                       onBlur={() => setEditingId(null)}
@@ -202,9 +252,10 @@ const RecipeCostBuilder = ({
                   </>
                 ) : (
                   <p className="text-white text-sm">
-                    {selectedItems.recipes.find(
-                      (recipe) => recipe.id === ingredient.id,
-                    )?.quantityUsed || ingredient.quantity}
+                    {selectedItems.recipes.find((r) => r.id === ingredient.id)
+                      ?.quantityUsed ||
+                      pendingQuantities[ingredient.id] ||
+                      ingredient.quantity}
                     {" / "}
                     {ingredient.quantity}
                     {" " + ingredient.unit}
@@ -247,9 +298,11 @@ const RecipeCostBuilder = ({
                     </p>
                     <p>
                       {selectItem.quantityUsed
-                        ? (selectItem.quantityUsed * ingredient.totalCost) /
-                          ingredient.quantity
-                        : ingredient.totalCost}
+                        ? (
+                            (selectItem.quantityUsed * ingredient.totalCost) /
+                            ingredient.quantity
+                          ).toFixed(2)
+                        : ingredient.totalCost.toFixed(2)}
                     </p>
                   </div>
                 ),

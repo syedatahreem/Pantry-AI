@@ -27,6 +27,7 @@ function App() {
           ingredients={ingredients}
           recipes={recipes}
           setRecipes={setRecipes}
+          setIngredients={setIngredients}
         />
       )}
     </Layout>
