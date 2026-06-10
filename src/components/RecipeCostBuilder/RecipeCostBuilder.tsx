@@ -291,6 +291,14 @@ const RecipeCostBuilder = ({
       <div className="bg-breakdown w-1/2 mt-10 rounded-xl p-4">
         <p className="text-teal mb-4">Cost breakdown</p>
         <div className="text-white flex flex-col justify-between text-sm">
+          {selectedItems.recipes.length === 0 && (
+            <div className="flex items-center gap-3 bg-yellow-500/10 border border-yellow-500/30 rounded-lg p-1">
+              <span className="text-yellow-400 text-sm">⚠️</span>
+              <p className="text-yellow-400 text-sm font-medium">
+                No ingredients selected — add at least one to save your recipe
+              </p>
+            </div>
+          )}
           {selectedItems.recipes.map((selectItem) =>
             ingredients.map(
               (ingredient) =>
@@ -320,7 +328,7 @@ const RecipeCostBuilder = ({
           <p className="text-teal">
             {selectedItems.recipes.length > 0
               ? `${costPerServing.toFixed(2)}`
-              : ""}
+              : "$0"}
           </p>
         </div>
       </div>
