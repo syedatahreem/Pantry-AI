@@ -159,7 +159,7 @@ const Ingredients = ({ ingredients, setIngredients }: IngredientProps) => {
                 {ingredient.unit}
               </p>
               <span className="text-teal">·</span>
-              <p>{ingredient.totalCost}</p>
+              <p>${ingredient.totalCost}</p>
             </div>
           </div>
         ))}
