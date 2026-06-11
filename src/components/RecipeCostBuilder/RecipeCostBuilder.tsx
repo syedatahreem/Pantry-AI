@@ -56,18 +56,23 @@ const RecipeCostBuilder = ({
     };
 
     setIngredients(
-      ingredients.map((ingredient) => {
-        const used = selectedItems.recipes.find((r) => r.id === ingredient.id);
-        if (!used) return ingredient;
-        return {
-          ...ingredient,
-          quantity: ingredient.quantity - (used.quantityUsed ?? 0),
-          totalCost:
-            ingredient.totalCost *
-            ((ingredient.quantity - (used.quantityUsed ?? 0)) /
-              ingredient.quantity),
-        };
-      }),
+      ingredients
+        .map((ingredient) => {
+          const used = selectedItems.recipes.find(
+            (r) => r.id === ingredient.id,
+          );
+          if (!used) return ingredient;
+          return {
+            ...ingredient,
+            quantity:
+              ingredient.quantity - (used.quantityUsed || ingredient.quantity),
+            totalCost:
+              ingredient.totalCost *
+              ((ingredient.quantity - (used.quantityUsed ?? 0)) /
+                ingredient.quantity),
+          };
+        })
+        .filter((ingredient) => ingredient.quantity > 0),
     );
 
     setRecipes([...recipes, newRecipe]);
