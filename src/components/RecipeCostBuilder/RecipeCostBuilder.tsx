@@ -173,6 +173,14 @@ const RecipeCostBuilder = ({
         <h3 className="text-sm text-gray-400 mt-8 mb-4">
           SELECT INGREDIENTS USED
         </h3>
+        {ingredients.length === 0 && (
+          <div className="flex items-center w-1/2 gap-3 bg-yellow-500/10 border border-yellow-500/30 rounded-lg p-1">
+            <span className="text-yellow-400 text-sm">⚠️</span>
+            <p className="text-yellow-400 text-sm font-medium">
+              No ingredients added — add at least one to save your recipe
+            </p>
+          </div>
+        )}
         <div className="grid grid-cols-3 gap-3">
           {ingredients.map((ingredient) => (
             <button
