@@ -54,13 +54,13 @@ const Ingredients = ({ ingredients, setIngredients }: IngredientProps) => {
     <div className="w-full">
       <h3 className="text-sm text-gray-400 mb-4">INGREDIENT MANAGER</h3>
 
-      <div className="flex flex-col gap-4 rounded-xl bg-card p-8">
-        <p className="text-white ">Add new ingredient</p>
+      <div className="flex flex-col gap-4 rounded-xl bg-card p-4 w-10/12">
+        <h2 className="text-white ">Add new ingredient</h2>
 
         <div className="grid grid-cols-2 gap-6">
           <div className="relative">
             <input
-              className="bg-slate-50 p-2 pr-8 rounded-md text-slate-900 w-full"
+              className="bg-panel border border-slate-700 rounded-xl p-3 text-white text-sm w-full"
               placeholder="Ingredient name"
               type="text"
               value={form.name}
@@ -99,7 +99,7 @@ const Ingredients = ({ ingredients, setIngredients }: IngredientProps) => {
             )}
           </div>
           <input
-            className="bg-slate-50 p-2 rounded-md text-slate-900"
+            className="bg-panel border border-slate-700 rounded-xl p-3 text-white text-sm w-full"
             placeholder="Quantity"
             type="number"
             min="0"
@@ -111,7 +111,7 @@ const Ingredients = ({ ingredients, setIngredients }: IngredientProps) => {
           />
 
           <select
-            className="bg-slate-50 p-2 rounded-md text-slate-900 appearance-none cursor-pointer pr-8 bg-no-repeat bg-right"
+            className="bg-panel border border-slate-700 rounded-xl p-3 text-white text-sm w-full appearance-none cursor-pointer pr-8 bg-no-repeat"
             style={{
               backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23475569' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E")`,
               backgroundPosition: "right 10px center",
@@ -127,7 +127,7 @@ const Ingredients = ({ ingredients, setIngredients }: IngredientProps) => {
             <option value="litre">litre</option>
           </select>
           <input
-            className="bg-slate-50 p-2 rounded-md text-slate-900"
+            className="bg-panel border border-slate-700 rounded-xl p-3 text-white text-sm w-full"
             placeholder="Price $"
             type="number"
             min="0"
