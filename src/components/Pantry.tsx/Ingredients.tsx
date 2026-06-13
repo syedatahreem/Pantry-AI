@@ -137,13 +137,13 @@ const Ingredients = ({ ingredients, setIngredients }: IngredientProps) => {
               setForm({ ...form, totalCost: Number(e.target.value) })
             }
           />
-          <button
-            className="text-white bg-teal p-2 rounded-lg font-bold"
-            onClick={handleSave}
-          >
-            Save
-          </button>
         </div>
+        <button
+          className="text-white bg-teal p-2 rounded-lg font-bold mt-4"
+          onClick={handleSave}
+        >
+          Save
+        </button>
       </div>
 
       <h3 className="text-sm text-gray-400 mb-4 mt-10">YOUR PANTRY</h3>

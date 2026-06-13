@@ -26,9 +26,17 @@ const Dashboard = ({
 
   return (
     <div className="min-h-screen px-6 pb-6">
-      <h1 className="text-2xl font-semibold text-white">Good day, {user}</h1>
-      <h4 className="text-sm text-muted  mt-1">What are you cooking today?</h4>
-
+      <div className="flex gap-4">
+        <img src="/images/food-bowl.png" className="w-12 h-12 opacity-80" />
+        <div className="flex flex-col">
+          <h1 className="text-2xl font-semibold text-white">
+            Good day, {user}
+          </h1>
+          <h4 className="text-sm text-muted  mt-1">
+            What are you cooking today?
+          </h4>
+        </div>
+      </div>
       <h3 className="mt-4 mb-2 text-sm text-gray-400">OVERVIEW</h3>
       <div className="flex gap-3">
         {[...statList].map((item) => (
