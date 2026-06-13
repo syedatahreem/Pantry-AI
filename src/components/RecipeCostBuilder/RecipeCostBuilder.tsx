@@ -114,12 +114,12 @@ const RecipeCostBuilder = ({
     <div>
       <h3 className="text-sm text-gray-400 mb-4">RECIPE BUILDER</h3>
 
-      <div className="flex flex-col gap-4 rounded-xl bg-card p-8">
+      <div className="flex flex-col gap-4 rounded-xl bg-card p-8 w-10/12">
         <p className="text-white ">Add new recipe</p>
         <div className="grid grid-cols-2 gap-6">
           <div className="relative">
             <input
-              className="bg-slate-50 p-2 pr-8 rounded-md text-slate-900 w-full"
+              className="bg-panel border border-slate-700 rounded-xl p-3 text-white text-sm w-full"
               placeholder="Recipe name"
               type="text"
               value={selectedItems.name}
@@ -160,7 +160,7 @@ const RecipeCostBuilder = ({
             )}
           </div>
           <input
-            className="bg-slate-50 p-2 rounded-md text-slate-900"
+            className="bg-panel border border-slate-700 rounded-xl p-3 text-white text-sm w-full"
             placeholder="No of servings"
             type="number"
             min="1"
@@ -179,12 +179,9 @@ const RecipeCostBuilder = ({
           SELECT INGREDIENTS USED
         </h3>
         {ingredients.length === 0 && (
-          <div className="flex items-center w-1/2 gap-3 bg-yellow-500/10 border border-yellow-500/30 rounded-lg p-1">
-            <span className="text-yellow-400 text-sm">⚠️</span>
-            <p className="text-yellow-400 text-sm font-medium">
-              No ingredients added — add at least one to save your recipe
-            </p>
-          </div>
+          <p className="text-sm text-white mt-2">
+            No ingredients in your pantry yet — add some to get started.
+          </p>
         )}
         <div className="grid grid-cols-3 gap-3">
           {ingredients.map((ingredient) => (
@@ -305,12 +302,9 @@ const RecipeCostBuilder = ({
         <p className="text-teal mb-4">Cost breakdown</p>
         <div className="text-white flex flex-col justify-between text-sm">
           {selectedItems.recipes.length === 0 && (
-            <div className="flex items-center gap-3 bg-yellow-500/10 border border-yellow-500/30 rounded-lg p-1">
-              <span className="text-yellow-400 text-sm">⚠️</span>
-              <p className="text-yellow-400 text-sm font-medium">
-                No ingredients selected — add at least one to save your recipe
-              </p>
-            </div>
+            <p className="text-teal-400/70 text-sm">
+              No ingredients selected — add at least one to save your recipe.
+            </p>
           )}
           {selectedItems.recipes.map((selectItem) =>
             ingredients.map(
@@ -336,7 +330,7 @@ const RecipeCostBuilder = ({
           )}
         </div>
 
-        <div className="text-white flex justify-between text-base mt-4">
+        <div className="text-teal flex justify-between text-base mt-4">
           <p>Cost per serving</p>
           <p className="text-teal">
             {selectedItems.recipes.length > 0
