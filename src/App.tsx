@@ -32,6 +32,7 @@ function App() {
           recipes={recipes}
           setRecipes={setRecipes}
           setIngredients={setIngredients}
+          setActiveTab={setActiveTab}
         />
       )}
     </Layout>

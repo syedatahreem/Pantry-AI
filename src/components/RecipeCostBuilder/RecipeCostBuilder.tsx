@@ -1,5 +1,5 @@
 import { useState } from "react";
-import type { IngredientsType, SavedRecipe } from "../../types";
+import type { IngredientsType, Pages, SavedRecipe } from "../../types";
 import { recipeOptions } from "../../utils/constants";
 import EditIcon from "../ui/EditIcon";
 import DeleteIcon from "../ui/DeleteIcon";
@@ -9,6 +9,7 @@ type InputProps = {
   recipes: SavedRecipe[];
   setRecipes: React.Dispatch<React.SetStateAction<SavedRecipe[]>>;
   setIngredients: React.Dispatch<React.SetStateAction<IngredientsType[]>>;
+  setActiveTab: React.Dispatch<React.SetStateAction<Pages>>;
 };
 
 const RecipeCostBuilder = ({
@@ -16,6 +17,7 @@ const RecipeCostBuilder = ({
   recipes,
   setRecipes,
   setIngredients,
+  setActiveTab,
 }: InputProps) => {
   const [selectedItems, setSelectedItems] = useState<SavedRecipe>({
     id: "",
@@ -297,6 +299,12 @@ const RecipeCostBuilder = ({
             </button>
           ))}
         </div>
+        <button
+          className="bg-panel text-teal rounded-2xl p-2 mt-4 w-full text-center"
+          onClick={() => setActiveTab("pantry")}
+        >
+          + Add Ingredients
+        </button>
       </div>
       <div className="bg-breakdown w-1/2 mt-10 rounded-xl p-4">
         <p className="text-teal mb-4">Cost breakdown</p>
