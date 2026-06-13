@@ -52,11 +52,11 @@ const Ingredients = ({ ingredients, setIngredients }: IngredientProps) => {
   };
   return (
     <div className="w-full">
-      <div className="flex gap-2 mb-6">
+      <div className="flex gap-4 items-center mb-6">
         <img
           src="/images/veggie-bowl.png"
           alt="ingredients"
-          className="w-8 h-8 opacity-80"
+          className="w-12 h-12 opacity-80"
         />
         <h1 className="text-xl text-white text-center">INGREDIENT MANAGER</h1>
       </div>

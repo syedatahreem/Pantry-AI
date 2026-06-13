@@ -114,7 +114,14 @@ const RecipeCostBuilder = ({
   };
   return (
     <div>
-      <h3 className="text-sm text-gray-400 mb-4">RECIPE BUILDER</h3>
+      <div className="flex gap-4 mb-6 items-center">
+        <img
+          src="/images/recipe.png"
+          alt="ingredients"
+          className="w-12 h-12 opacity-80"
+        />
+        <h1 className="text-xl text-white text-center">RECIPE BUILDER</h1>
+      </div>
 
       <div className="flex flex-col gap-4 rounded-xl bg-card p-8 w-10/12">
         <p className="text-white ">Add new recipe</p>
