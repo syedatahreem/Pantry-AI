@@ -10,6 +10,7 @@ export default {
         teal: "var(--color-teal)",
         muted: "var(--color-muted)",
         breakdown: "var(--color-breakdown)",
+        tealmuted: "var(--color-teal-muted)",
       },
       fontFamily: {
         sans: ["Inter", "sans-serif"],
