@@ -186,7 +186,7 @@ const RecipeCostBuilder = ({
         <div className="grid grid-cols-3 gap-3">
           {ingredients.map((ingredient) => (
             <button
-              className={`bg-card p-2 rounded-lg flex justify-between items-center text-white cursor-pointer ${
+              className={`bg-card p-2 rounded-lg flex justify-between items-center text-white cursor-pointer text-xs ${
                 selectedItems.recipes.some((r) => r.id === ingredient.id)
                   ? "bg-teal border border-teal-400"
                   : "bg-card  border border-white"
@@ -310,7 +310,7 @@ const RecipeCostBuilder = ({
             ingredients.map(
               (ingredient) =>
                 ingredient.id === selectItem.id && (
-                  <div className="flex  justify-between">
+                  <div className="flex justify-between">
                     <p>
                       {ingredient.name}(
                       {selectItem.quantityUsed || ingredient.quantity}
