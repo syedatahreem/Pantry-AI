@@ -188,9 +188,16 @@ const RecipeCostBuilder = ({
           SELECT INGREDIENTS USED
         </h3>
         {ingredients.length === 0 && (
-          <p className="text-sm text-white mt-2">
-            No ingredients in your pantry yet — add some to get started.
-          </p>
+          <div className="flex flex-col items-center gap-3 py-6">
+            <img
+              src="/images/veggie-bowl.png"
+              alt="empty"
+              className="w-16 h-16 opacity-40"
+            />
+            <p className="text-sm" style={{ color: "#14b8a6", opacity: 0.7 }}>
+              No ingredients in your pantry yet — add some first.
+            </p>
+          </div>
         )}
         <div className="grid grid-cols-3 gap-3">
           {ingredients.map((ingredient) => (

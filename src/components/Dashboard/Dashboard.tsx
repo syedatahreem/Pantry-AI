@@ -68,6 +68,18 @@ const Dashboard = ({
           </div>
         ))}
       </div>
+      {recipes.length <= 0 && (
+        <div className="flex flex-col items-center gap-3 py-8">
+          <img
+            src="/images/food-bowl.png"
+            alt="no recipes"
+            className="w-20 h-20 opacity-40 object-contain"
+          />
+          <p className="text-sm" style={{ color: "#14b8a6", opacity: 0.7 }}>
+            No recipes yet — add some to get started.
+          </p>
+        </div>
+      )}
       <button
         className="bg-card text-teal rounded-2xl p-4 mt-4 w-full text-center"
         onClick={() => setActiveTab("recipe-builder")}
