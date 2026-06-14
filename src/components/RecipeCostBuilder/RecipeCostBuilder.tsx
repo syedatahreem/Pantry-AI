@@ -320,7 +320,7 @@ const RecipeCostBuilder = ({
           + Add Ingredients
         </button>
       </div>
-      <div className="bg-breakdown w-1/2 mt-10 rounded-xl p-4">
+      <div className="bg-breakdown w-10/12 mt-10 rounded-xl p-4">
         <p className="text-teal mb-4">Cost breakdown</p>
         <div className="text-white flex flex-col justify-between text-sm">
           {selectedItems.recipes.length === 0 && (
