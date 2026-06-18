@@ -29,15 +29,15 @@
 
 ### Dashboard
 
-![Dashboard](pantry-ai\frontend\public\image.png)
+![Dashboard](./pantry-ai/frontend/public/image.png)
 
 ### Pantry Manager
 
-![Pantry](pantry-ai\frontend\public\image-2.png)
+![Pantry](./pantry-ai/frontend/public/image-2.png)
 
 ### Recipe Builder
 
-![Recipe Builder](pantry-ai\frontend\public\image-3.png)
+![Recipe Builder](./pantry-ai/frontend/public/image-3.png)
 
 ---
 
