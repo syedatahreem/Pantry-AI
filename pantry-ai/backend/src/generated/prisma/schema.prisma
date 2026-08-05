@@ -1,0 +1,48 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model User {
+  id          String       @id @default(uuid())
+  email       String       @unique
+  createdAt   DateTime     @default(now())
+  ingredients Ingredient[]
+  recipes     Recipe[]
+}
+
+model Ingredient {
+  id          String             @id @default(uuid())
+  userId      String
+  user        User               @relation(fields: [userId], references: [id])
+  name        String
+  quantity    Float
+  unit        String
+  totalCost   Float
+  createdAt   DateTime           @default(now())
+  recipeItems RecipeIngredient[]
+}
+
+model Recipe {
+  id             String             @id @default(uuid())
+  userId         String
+  user           User               @relation(fields: [userId], references: [id])
+  name           String
+  servings       Int
+  costPerServing Float
+  createdAt      DateTime           @default(now())
+  ingredients    RecipeIngredient[]
+}
+
+model RecipeIngredient {
+  id           String     @id @default(uuid())
+  recipeId     String
+  recipe       Recipe     @relation(fields: [recipeId], references: [id])
+  ingredientId String
+  ingredient   Ingredient @relation(fields: [ingredientId], references: [id])
+  quantityUsed Float
+}
