@@ -2,7 +2,8 @@ import Router from "express";
 
 const router = Router();
 
-router.get("/recipes", (req, res) => {});
-router.post("/create-recipe", (req, res) => {});
+router.get("/", (req, res) => {});
+router.post("/", (req, res) => {});
+router.delete("/:id", (req, res) => {});
 
 export default router;
