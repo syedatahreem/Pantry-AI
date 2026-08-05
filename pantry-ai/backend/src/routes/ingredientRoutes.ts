@@ -1,9 +1,14 @@
 import { Router } from "express";
+import {
+  getIngredients,
+  createIngredient,
+  deleteIngredient,
+} from "../controllers/ingredientController.js";
 
 const router = Router();
 
-router.get("/", (req, res) => {});
-router.post("/", (req, res) => {});
-router.delete("/:id", (req, res) => {});
+router.get("/", getIngredients);
+router.post("/", createIngredient);
+router.delete("/:id", deleteIngredient);
 
 export default router;
