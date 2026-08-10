@@ -8,11 +8,12 @@ datasource db {
 }
 
 model User {
-  id          String       @id @default(uuid())
-  email       String       @unique
-  createdAt   DateTime     @default(now())
-  ingredients Ingredient[]
-  recipes     Recipe[]
+  id           String       @id @default(uuid())
+  email        String       @unique
+  passwordHash String
+  createdAt    DateTime     @default(now())
+  ingredients  Ingredient[]
+  recipes      Recipe[]
 }
 
 model Ingredient {

@@ -1281,18 +1281,21 @@ export namespace Prisma {
   export type UserMinAggregateOutputType = {
     id: string | null
     email: string | null
+    passwordHash: string | null
     createdAt: Date | null
   }
 
   export type UserMaxAggregateOutputType = {
     id: string | null
     email: string | null
+    passwordHash: string | null
     createdAt: Date | null
   }
 
   export type UserCountAggregateOutputType = {
     id: number
     email: number
+    passwordHash: number
     createdAt: number
     _all: number
   }
@@ -1301,18 +1304,21 @@ export namespace Prisma {
   export type UserMinAggregateInputType = {
     id?: true
     email?: true
+    passwordHash?: true
     createdAt?: true
   }
 
   export type UserMaxAggregateInputType = {
     id?: true
     email?: true
+    passwordHash?: true
     createdAt?: true
   }
 
   export type UserCountAggregateInputType = {
     id?: true
     email?: true
+    passwordHash?: true
     createdAt?: true
     _all?: true
   }
@@ -1392,6 +1398,7 @@ export namespace Prisma {
   export type UserGroupByOutputType = {
     id: string
     email: string
+    passwordHash: string
     createdAt: Date
     _count: UserCountAggregateOutputType | null
     _min: UserMinAggregateOutputType | null
@@ -1415,6 +1422,7 @@ export namespace Prisma {
   export type UserSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     email?: boolean
+    passwordHash?: boolean
     createdAt?: boolean
     ingredients?: boolean | User$ingredientsArgs<ExtArgs>
     recipes?: boolean | User$recipesArgs<ExtArgs>
@@ -1424,22 +1432,25 @@ export namespace Prisma {
   export type UserSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     email?: boolean
+    passwordHash?: boolean
     createdAt?: boolean
   }, ExtArgs["result"]["user"]>
 
   export type UserSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     email?: boolean
+    passwordHash?: boolean
     createdAt?: boolean
   }, ExtArgs["result"]["user"]>
 
   export type UserSelectScalar = {
     id?: boolean
     email?: boolean
+    passwordHash?: boolean
     createdAt?: boolean
   }
 
-  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email" | "createdAt", ExtArgs["result"]["user"]>
+  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email" | "passwordHash" | "createdAt", ExtArgs["result"]["user"]>
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     ingredients?: boolean | User$ingredientsArgs<ExtArgs>
     recipes?: boolean | User$recipesArgs<ExtArgs>
@@ -1457,6 +1468,7 @@ export namespace Prisma {
     scalars: $Extensions.GetPayloadResult<{
       id: string
       email: string
+      passwordHash: string
       createdAt: Date
     }, ExtArgs["result"]["user"]>
     composites: {}
@@ -1885,6 +1897,7 @@ export namespace Prisma {
   interface UserFieldRefs {
     readonly id: FieldRef<"User", 'String'>
     readonly email: FieldRef<"User", 'String'>
+    readonly passwordHash: FieldRef<"User", 'String'>
     readonly createdAt: FieldRef<"User", 'DateTime'>
   }
     
@@ -5755,6 +5768,7 @@ export namespace Prisma {
   export const UserScalarFieldEnum: {
     id: 'id',
     email: 'email',
+    passwordHash: 'passwordHash',
     createdAt: 'createdAt'
   };
 
@@ -5882,6 +5896,7 @@ export namespace Prisma {
     NOT?: UserWhereInput | UserWhereInput[]
     id?: StringFilter<"User"> | string
     email?: StringFilter<"User"> | string
+    passwordHash?: StringFilter<"User"> | string
     createdAt?: DateTimeFilter<"User"> | Date | string
     ingredients?: IngredientListRelationFilter
     recipes?: RecipeListRelationFilter
@@ -5890,6 +5905,7 @@ export namespace Prisma {
   export type UserOrderByWithRelationInput = {
     id?: SortOrder
     email?: SortOrder
+    passwordHash?: SortOrder
     createdAt?: SortOrder
     ingredients?: IngredientOrderByRelationAggregateInput
     recipes?: RecipeOrderByRelationAggregateInput
@@ -5901,6 +5917,7 @@ export namespace Prisma {
     AND?: UserWhereInput | UserWhereInput[]
     OR?: UserWhereInput[]
     NOT?: UserWhereInput | UserWhereInput[]
+    passwordHash?: StringFilter<"User"> | string
     createdAt?: DateTimeFilter<"User"> | Date | string
     ingredients?: IngredientListRelationFilter
     recipes?: RecipeListRelationFilter
@@ -5909,6 +5926,7 @@ export namespace Prisma {
   export type UserOrderByWithAggregationInput = {
     id?: SortOrder
     email?: SortOrder
+    passwordHash?: SortOrder
     createdAt?: SortOrder
     _count?: UserCountOrderByAggregateInput
     _max?: UserMaxOrderByAggregateInput
@@ -5921,6 +5939,7 @@ export namespace Prisma {
     NOT?: UserScalarWhereWithAggregatesInput | UserScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"User"> | string
     email?: StringWithAggregatesFilter<"User"> | string
+    passwordHash?: StringWithAggregatesFilter<"User"> | string
     createdAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
   }
 
@@ -6117,6 +6136,7 @@ export namespace Prisma {
   export type UserCreateInput = {
     id?: string
     email: string
+    passwordHash: string
     createdAt?: Date | string
     ingredients?: IngredientCreateNestedManyWithoutUserInput
     recipes?: RecipeCreateNestedManyWithoutUserInput
@@ -6125,6 +6145,7 @@ export namespace Prisma {
   export type UserUncheckedCreateInput = {
     id?: string
     email: string
+    passwordHash: string
     createdAt?: Date | string
     ingredients?: IngredientUncheckedCreateNestedManyWithoutUserInput
     recipes?: RecipeUncheckedCreateNestedManyWithoutUserInput
@@ -6133,6 +6154,7 @@ export namespace Prisma {
   export type UserUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
+    passwordHash?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ingredients?: IngredientUpdateManyWithoutUserNestedInput
     recipes?: RecipeUpdateManyWithoutUserNestedInput
@@ -6141,6 +6163,7 @@ export namespace Prisma {
   export type UserUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
+    passwordHash?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ingredients?: IngredientUncheckedUpdateManyWithoutUserNestedInput
     recipes?: RecipeUncheckedUpdateManyWithoutUserNestedInput
@@ -6149,18 +6172,21 @@ export namespace Prisma {
   export type UserCreateManyInput = {
     id?: string
     email: string
+    passwordHash: string
     createdAt?: Date | string
   }
 
   export type UserUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
+    passwordHash?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type UserUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
+    passwordHash?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -6399,18 +6425,21 @@ export namespace Prisma {
   export type UserCountOrderByAggregateInput = {
     id?: SortOrder
     email?: SortOrder
+    passwordHash?: SortOrder
     createdAt?: SortOrder
   }
 
   export type UserMaxOrderByAggregateInput = {
     id?: SortOrder
     email?: SortOrder
+    passwordHash?: SortOrder
     createdAt?: SortOrder
   }
 
   export type UserMinOrderByAggregateInput = {
     id?: SortOrder
     email?: SortOrder
+    passwordHash?: SortOrder
     createdAt?: SortOrder
   }
 
@@ -7107,6 +7136,7 @@ export namespace Prisma {
   export type UserCreateWithoutIngredientsInput = {
     id?: string
     email: string
+    passwordHash: string
     createdAt?: Date | string
     recipes?: RecipeCreateNestedManyWithoutUserInput
   }
@@ -7114,6 +7144,7 @@ export namespace Prisma {
   export type UserUncheckedCreateWithoutIngredientsInput = {
     id?: string
     email: string
+    passwordHash: string
     createdAt?: Date | string
     recipes?: RecipeUncheckedCreateNestedManyWithoutUserInput
   }
@@ -7159,6 +7190,7 @@ export namespace Prisma {
   export type UserUpdateWithoutIngredientsInput = {
     id?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
+    passwordHash?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     recipes?: RecipeUpdateManyWithoutUserNestedInput
   }
@@ -7166,6 +7198,7 @@ export namespace Prisma {
   export type UserUncheckedUpdateWithoutIngredientsInput = {
     id?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
+    passwordHash?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     recipes?: RecipeUncheckedUpdateManyWithoutUserNestedInput
   }
@@ -7199,6 +7232,7 @@ export namespace Prisma {
   export type UserCreateWithoutRecipesInput = {
     id?: string
     email: string
+    passwordHash: string
     createdAt?: Date | string
     ingredients?: IngredientCreateNestedManyWithoutUserInput
   }
@@ -7206,6 +7240,7 @@ export namespace Prisma {
   export type UserUncheckedCreateWithoutRecipesInput = {
     id?: string
     email: string
+    passwordHash: string
     createdAt?: Date | string
     ingredients?: IngredientUncheckedCreateNestedManyWithoutUserInput
   }
@@ -7251,6 +7286,7 @@ export namespace Prisma {
   export type UserUpdateWithoutRecipesInput = {
     id?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
+    passwordHash?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ingredients?: IngredientUpdateManyWithoutUserNestedInput
   }
@@ -7258,6 +7294,7 @@ export namespace Prisma {
   export type UserUncheckedUpdateWithoutRecipesInput = {
     id?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
+    passwordHash?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ingredients?: IngredientUncheckedUpdateManyWithoutUserNestedInput
   }
